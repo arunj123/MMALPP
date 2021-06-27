@@ -22,6 +22,7 @@ public:
     {
         mmalpp_impl_::setup_ports_(input_, component_->input, component_->input_num);
         mmalpp_impl_::setup_ports_(output_, component_->output, component_->output_num);
+        mmalpp_impl_::setup_ports_(clock_, component_->clock, component_->clock_num);
     }
 
     /**
@@ -74,6 +75,14 @@ public:
     { return component_->is_enabled; }
 
     /**
+     * Get clock port number.
+     */
+    uint32_t
+    clocks() const
+    { return component_->clock_num; }
+
+
+    /**
      * Get input port number.
      */
     uint32_t
@@ -86,6 +95,14 @@ public:
     uint32_t
     outputs() const
     { return component_->output_num; }
+
+    /**
+     * Get n-th clock port.
+     */
+    Port<CLOCK>&
+    clock(uint16_t num)
+    { return clock_[num]; }
+
 
     /**
      * Get n-th output port.
@@ -114,6 +131,7 @@ private:
 
     std::vector<Port<INPUT>> input_;
     std::vector<Port<OUTPUT>> output_;
+    std::vector<Port<CLOCK>> clock_;
     Port<CONTROL> control_;
 
 };

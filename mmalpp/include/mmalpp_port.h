@@ -202,7 +202,7 @@ public:
      */
     void
     send_buffer(const Buffer& buffer) const
-    { mmalpp_impl_::port_send_buffer(get(), buffer.get()); }
+    { if(!buffer.is_null()) mmalpp_impl_::port_send_buffer(get(), buffer.get()); }
 
     /**
      * Get Parameter instance to set port's parameter.
