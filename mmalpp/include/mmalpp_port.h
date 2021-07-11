@@ -28,6 +28,11 @@ public:
         : port_(port)
     {}
 
+
+    void
+    get_header(MMAL_PARAMETER_HEADER_T* hdr)
+    { mmalpp_impl_::get_parameters_from_port_(port_, hdr); }
+
     void
     set_header(MMAL_PARAMETER_HEADER_T* hdr)
     { mmalpp_impl_::set_parameters_to_port_(port_, hdr); }

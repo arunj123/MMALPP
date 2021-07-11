@@ -93,6 +93,18 @@ set_parameters_to_port_(MMAL_PORT_T* port_,
                   + std::string(port_->name)); }
 
 /**
+ * Get a parameter on a port.
+ */
+inline void
+get_parameters_from_port_(MMAL_PORT_T* port_,
+                        MMAL_PARAMETER_HEADER_T* param_)
+{ if (MMAL_STATUS_T status = mmal_port_parameter_get(
+                port_, param_); status)
+        e_check__(status, "cannot get parameter from the port: "
+                  + std::string(port_->name)); }
+
+
+/**
  * Set a parameter on a port.
  */
 inline void
