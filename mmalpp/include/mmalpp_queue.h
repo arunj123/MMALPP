@@ -64,6 +64,7 @@ public:
     get_buffer(int timeout_ms = 0)
     { return mmalpp_impl_::get_buffer_from_queue_(queue_, timeout_ms); }
 
+    MMAL_QUEUE_T* get() { return queue_; }
 private:
     MMAL_QUEUE_T* queue_;
 

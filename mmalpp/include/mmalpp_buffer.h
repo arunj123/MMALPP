@@ -138,6 +138,22 @@ public:
     }
 
     /**
+     * Bit copy from mmal raw buffer. Data is not replicated, but instead pointer is copied.
+     */
+    void
+    copy_from(const MMAL_BUFFER_HEADER_T *buffer)
+    {
+        buffer_->cmd = buffer->cmd;
+        buffer_->pts = buffer->pts;
+        buffer_->dts = buffer->dts;
+        buffer_->flags = buffer->flags;
+        buffer_->data = buffer->data;
+        buffer_->length = buffer->length;
+        buffer_->user_data = buffer->user_data;
+        buffer_->alloc_size = buffer->alloc_size;
+    }
+
+    /**
      * Copy all fields from another Buffer. It copies presentation timestamp,
      * decoding timestamp, command, flags, type and data too.
      * This buffer must have sufficient size to store length bytes from the source buffer.
@@ -202,6 +218,14 @@ public:
     { return buffer_->flags; }
 
     /**
+     * Set flags if this Buffer.
+     */
+    void
+    flags(uint32_t flags) const
+    { buffer_->flags = flags; }
+
+
+    /**
      * Get offset position of this Buffer.
      */
     uint32_t
@@ -225,11 +249,27 @@ public:
     { return buffer_->dts; }
 
     /**
+     * Set decoding timestamp.
+     */
+    void
+    decoding_timestamp(int64_t dts)
+    { buffer_->dts = dts; }
+
+
+    /**
      * Get presentation timestamp.
      */
     int64_t
     presentation_timestamp() const
     { return buffer_->pts; }
+
+    /**
+     * Set presentation timestamp.
+     */
+    void
+    presentation_timestamp(int64_t pts)
+    { buffer_->pts = pts; }
+
 
     /**
      * Get allocated size.

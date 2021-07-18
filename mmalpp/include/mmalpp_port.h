@@ -192,7 +192,7 @@ public:
      * they will be set to minimum values.
      */
     void
-    set_default_buffer()
+    set_default_buffer(int extra_buffers=0)
     {
         (port_->buffer_num_recommended == 0) ?
                     port_->buffer_num = port_->buffer_num_min
@@ -200,7 +200,20 @@ public:
         (port_->buffer_size_recommended == 0) ?
                     port_->buffer_size = port_->buffer_size_min
                 : port_->buffer_size = port_->buffer_size_recommended;
+
+        port_->buffer_num += extra_buffers;
     }
+
+    /**
+     * Set buffer_num and buffer_size to value.
+     */
+    void
+    set_buffer_info(std::size_t buffer_num, std::size_t buffer_size)
+    {
+        port_->buffer_num = buffer_num;
+        port_->buffer_size = buffer_size;
+    }
+
 
     /**
      * Send a Buffer to this port.
